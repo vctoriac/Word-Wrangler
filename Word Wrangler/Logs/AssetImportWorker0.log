@@ -340,3 +340,21 @@ Start importing Assets/Scenes/01_Gameplay Screen.unity using Guid(2744a95133f0fd
  -> (artifact id: 'fc626f0ac7f7eb5039d2406c1567cfdd') in 0.004112 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2144.442147 seconds.
+  path: Assets/MenuAssets
+  artifactKey: Guid(f908a05d14d333c469147fb78c29ad96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MenuAssets using Guid(f908a05d14d333c469147fb78c29ad96) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '6223d089986e520bcf0b0c5c670a726f') in 0.004540 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 543.982494 seconds.
+  path: Assets/GameAssets
+  artifactKey: Guid(917dd74410cf8c241b92e4960a32f1a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GameAssets using Guid(917dd74410cf8c241b92e4960a32f1a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '4a52ea811ced3a1d82178a2b3f9025f3') in 0.004066 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
