@@ -15,16 +15,22 @@ public class WordGame : MonoBehaviour
     public Slider playerHealth;
     public Slider enemyHealth;
     public Animator enemyAnimator;
-    public GameObject countdownPanel;  // Reference to the Countdown Panel
-    public TMP_Text countdownText;     // Reference to the TMP_Text for countdown
+    public GameObject countdownPanel;
+    public TMP_Text countdownText;
+
+    public int synonymsToMatch = 2; // How many synonyms to pass the round
+    public int grazeThreshold = 1;  // How many to avoid full damage on skip
 
     private string currentWord;
     private List<string> currentSynonyms;
-    private HashSet<string> matchedSynonyms = new HashSet<string>();  // Track matched synonyms
+    private HashSet<string> matchedSynonyms = new HashSet<string>();
+    private List<string> unusedWords = new List<string>();
     private float timeLeft = 30f;
+    public float TimeLeft => timeLeft;
+
     private bool gameRunning = false;
     private int score = 0;
-    private int playerHP = 5;
+    private float playerHP = 5f; // Float to allow 0.5 HP loss
     private int enemyHP = 5;
 
     void Start()
@@ -39,7 +45,8 @@ public class WordGame : MonoBehaviour
 
         inputField.onSubmit.AddListener(CheckInput);
 
-        // Start the countdown before allowing the player to start typing
+        unusedWords = new List<string>(WordBank.Words.Keys);
+
         countdownPanel.SetActive(true);
         countdownText.text = "3";
         StartCoroutine(StartCountdown());
@@ -51,7 +58,6 @@ public class WordGame : MonoBehaviour
 
         timeLeft -= Time.deltaTime;
 
-        // Convert timeLeft (float) to minutes and seconds
         int minutes = Mathf.FloorToInt(timeLeft / 60);
         int seconds = Mathf.FloorToInt(timeLeft % 60);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
@@ -66,27 +72,32 @@ public class WordGame : MonoBehaviour
     {
         for (int i = 3; i > 0; i--)
         {
-            countdownText.text = i.ToString();  // Update countdown text
-            yield return new WaitForSeconds(1f);  // Wait for 1 second
+            countdownText.text = i.ToString();
+            yield return new WaitForSeconds(1f);
         }
 
-        countdownText.text = "GO!";  // Display "GO!" when countdown ends
-        yield return new WaitForSeconds(1f);  // Wait for 1 second
+        countdownText.text = "GO!";
+        yield return new WaitForSeconds(1f);
 
-        countdownPanel.SetActive(false);  // Hide the countdown panel after countdown finishes
+        countdownPanel.SetActive(false);
 
-        // Start the game
         gameRunning = true;
-        inputField.interactable = true;  // Enable the input field
-        inputField.ActivateInputField();  // Automatically focus on the input field so the player can start typing
+        inputField.interactable = true;
+        inputField.ActivateInputField();
         PickRandomWord();
     }
 
-
     void PickRandomWord()
     {
-        var keys = new List<string>(WordBank.Words.Keys);
-        currentWord = keys[Random.Range(0, keys.Count)];
+        if (unusedWords.Count == 0)
+        {
+            unusedWords = new List<string>(WordBank.Words.Keys);
+        }
+
+        int randomIndex = Random.Range(0, unusedWords.Count);
+        currentWord = unusedWords[randomIndex];
+        unusedWords.RemoveAt(randomIndex);
+
         currentSynonyms = WordBank.Words[currentWord];
         matchedSynonyms.Clear();
         wordText.text = currentWord;
@@ -103,7 +114,7 @@ public class WordGame : MonoBehaviour
         {
             if (matchedSynonyms.Contains(userInput))
             {
-                feedbackText.text = "That one's already been done!";
+                feedbackText.text = "That's already been done!";
             }
             else
             {
@@ -118,9 +129,10 @@ public class WordGame : MonoBehaviour
                     return;
                 }
 
-                if (matchedSynonyms.Count == currentSynonyms.Count)
+                if (matchedSynonyms.Count >= synonymsToMatch)
                 {
                     NextRound();
+                    return;
                 }
             }
         }
@@ -133,13 +145,15 @@ public class WordGame : MonoBehaviour
 
         inputField.text = "";
         inputField.ActivateInputField();
+        inputField.selectionStringAnchorPosition = 0;
+        inputField.selectionStringFocusPosition = 0;
         UpdateScoreText();
     }
 
     void EnemyShoots()
     {
         feedbackText.text += " The enemy fired!";
-        playerHP--;
+        playerHP -= 1f;
         playerHealth.value = playerHP;
 
         if (playerHP <= 0)
@@ -148,9 +162,39 @@ public class WordGame : MonoBehaviour
         }
     }
 
+    public void SkipWord()
+    {
+        if (!gameRunning) return;
+
+        if (matchedSynonyms.Count >= grazeThreshold)
+        {
+            feedbackText.text = "Skipped! The enemy grazed you!";
+            playerHP -= 0.5f;
+        }
+        else
+        {
+            feedbackText.text = "Skipped! The enemy fired!";
+            playerHP -= 1f;
+        }
+
+        playerHealth.value = playerHP;
+
+        if (playerHP <= 0)
+        {
+            EndGame(false);
+            return;
+        }
+
+        NextRound();
+    }
+
     void NextRound()
     {
         PickRandomWord();
+        inputField.text = "";
+        inputField.ActivateInputField();
+        inputField.selectionStringAnchorPosition = 0;
+        inputField.selectionStringFocusPosition = 0;
     }
 
     void EndGame(bool won = false)
