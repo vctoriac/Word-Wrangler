@@ -123,6 +123,8 @@ public class WordGame : MonoBehaviour
                 score += 10;
                 enemyHealth.value -= 1;
 
+                FindObjectOfType<CharacterAnimatorUI>()?.PlayShootAnimation();
+
                 if (enemyHealth.value <= 0)
                 {
                     EndGame(true);
