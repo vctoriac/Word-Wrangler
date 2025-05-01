@@ -11,15 +11,27 @@ public class WordGame : MonoBehaviour
     public TMP_Text timerText;
     public TMP_Text feedbackText;
     public GameObject gameOverScreen;
-    public TMP_Text scoreText;
     public Slider playerHealth;
     public Slider enemyHealth;
     public Animator enemyAnimator;
     public GameObject countdownPanel;
     public TMP_Text countdownText;
+    public GameObject pauseScreen;
+    public Button pauseButton;   
+    public Button resumeButton;   
 
-    public int synonymsToMatch = 2; // How many synonyms to pass the round
-    public int grazeThreshold = 1;  // How many to avoid full damage on skip
+
+    public int synonymsToMatch = 2;
+    public int grazeThreshold = 1;
+
+    public Image timerImage;
+    public Sprite[] timerSprites;
+    public float frameInterval = 1f;
+    public float feedbackDuration = 3f;
+
+    private int timerFrame = 0;
+    private float frameTimer = 0f;
+    private Coroutine feedbackCoroutine;
 
     private string currentWord;
     private List<string> currentSynonyms;
@@ -29,27 +41,31 @@ public class WordGame : MonoBehaviour
     public float TimeLeft => timeLeft;
 
     private bool gameRunning = false;
-    private int score = 0;
-    private float playerHP = 5f; // Float to allow 0.5 HP loss
+    private float playerHP = 5f;
     private int enemyHP = 5;
 
     void Start()
     {
         gameOverScreen.SetActive(false);
         feedbackText.text = "";
-        UpdateScoreText();
+
         playerHealth.maxValue = playerHP;
         enemyHealth.maxValue = enemyHP;
         playerHealth.value = playerHP;
         enemyHealth.value = enemyHP;
 
-        inputField.onSubmit.AddListener(CheckInput);
+        
 
+        inputField.onSubmit.AddListener(CheckInput);
         unusedWords = new List<string>(WordBank.Words.Keys);
 
         countdownPanel.SetActive(true);
         countdownText.text = "3";
         StartCoroutine(StartCountdown());
+
+        pauseButton.onClick.AddListener(PauseGame);
+        resumeButton.onClick.AddListener(ResumeGame);
+        pauseScreen.SetActive(false);
     }
 
     void Update()
@@ -57,7 +73,6 @@ public class WordGame : MonoBehaviour
         if (!gameRunning) return;
 
         timeLeft -= Time.deltaTime;
-
         int minutes = Mathf.FloorToInt(timeLeft / 60);
         int seconds = Mathf.FloorToInt(timeLeft % 60);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
@@ -66,6 +81,8 @@ public class WordGame : MonoBehaviour
         {
             EndGame();
         }
+
+        AnimateTimer();
     }
 
     IEnumerator StartCountdown()
@@ -87,6 +104,26 @@ public class WordGame : MonoBehaviour
         PickRandomWord();
     }
 
+    public void PauseGame()
+    {
+        if (!gameRunning) return;
+
+        Time.timeScale = 0f;
+        pauseScreen.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        pauseScreen.SetActive(false);
+        Time.timeScale = 1f;
+
+        PickRandomWord(); // Change to a new word
+        inputField.text = "";
+        inputField.ActivateInputField();
+        inputField.selectionStringAnchorPosition = 0;
+        inputField.selectionStringFocusPosition = 0;
+    }
+
     void PickRandomWord()
     {
         if (unusedWords.Count == 0)
@@ -102,6 +139,35 @@ public class WordGame : MonoBehaviour
         matchedSynonyms.Clear();
         wordText.text = currentWord;
         timeLeft = 30f;
+
+        timerFrame = 0;
+        frameTimer = 0f;
+
+        if (timerSprites.Length > 0 && timerImage != null)
+        {
+            timerImage.sprite = timerSprites[timerFrame];
+        }
+    }
+
+    void AnimateTimer()
+    {
+        frameTimer += Time.deltaTime;
+
+        if (frameTimer >= frameInterval)
+        {
+            frameTimer = 0f;
+            timerFrame++;
+
+            if (timerFrame >= timerSprites.Length)
+            {
+                timerFrame = 0; // Loop
+            }
+
+            if (timerFrame < timerSprites.Length && timerImage != null)
+            {
+                timerImage.sprite = timerSprites[timerFrame];
+            }
+        }
     }
 
     void CheckInput(string userInput)
@@ -114,13 +180,12 @@ public class WordGame : MonoBehaviour
         {
             if (matchedSynonyms.Contains(userInput))
             {
-                feedbackText.text = "That's already been done!";
+                ShowFeedback("That's already been done!");
             }
             else
             {
-                feedbackText.text = "Hit!";
+                ShowFeedback("Hit!");
                 matchedSynonyms.Add(userInput);
-                score += 10;
                 enemyHealth.value -= 1;
 
                 FindObjectOfType<CharacterAnimatorUI>()?.PlayShootAnimation();
@@ -140,8 +205,7 @@ public class WordGame : MonoBehaviour
         }
         else
         {
-            feedbackText.text = "Miss!";
-            score -= 5;
+            ShowFeedback("Miss!");
             EnemyShoots();
         }
 
@@ -149,12 +213,10 @@ public class WordGame : MonoBehaviour
         inputField.ActivateInputField();
         inputField.selectionStringAnchorPosition = 0;
         inputField.selectionStringFocusPosition = 0;
-        UpdateScoreText();
     }
 
     void EnemyShoots()
     {
-        feedbackText.text += " The enemy fired!";
         playerHP -= 1f;
         playerHealth.value = playerHP;
 
@@ -170,12 +232,12 @@ public class WordGame : MonoBehaviour
 
         if (matchedSynonyms.Count >= grazeThreshold)
         {
-            feedbackText.text = "Skipped! The enemy grazed you!";
+            ShowFeedback("Skipped! The enemy grazed you!");
             playerHP -= 0.5f;
         }
         else
         {
-            feedbackText.text = "Skipped! The enemy fired!";
+            ShowFeedback("Skipped! The enemy fired!");
             playerHP -= 1f;
         }
 
@@ -214,8 +276,18 @@ public class WordGame : MonoBehaviour
         }
     }
 
-    void UpdateScoreText()
+    void ShowFeedback(string message)
     {
-        scoreText.text = score.ToString();
+        if (feedbackCoroutine != null)
+            StopCoroutine(feedbackCoroutine);
+
+        feedbackCoroutine = StartCoroutine(FeedbackRoutine(message));
+    }
+
+    IEnumerator FeedbackRoutine(string message)
+    {
+        feedbackText.text = message;
+        yield return new WaitForSeconds(feedbackDuration);
+        feedbackText.text = "";
     }
 }

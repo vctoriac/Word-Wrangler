@@ -2634,14 +2634,26 @@ MonoBehaviour:
   timerText: {fileID: 161580666}
   feedbackText: {fileID: 72356438}
   gameOverScreen: {fileID: 83940024}
-  scoreText: {fileID: 546718050}
   playerHealth: {fileID: 1829833089}
   enemyHealth: {fileID: 372114372}
   enemyAnimator: {fileID: 0}
   countdownPanel: {fileID: 1712830060}
   countdownText: {fileID: 1778055409}
+  pauseScreen: {fileID: 1955299440}
+  pauseButton: {fileID: 1529393965}
+  resumeButton: {fileID: 2120459339}
   synonymsToMatch: 2
   grazeThreshold: 1
+  timerImage: {fileID: 1502133997}
+  timerSprites:
+  - {fileID: 563952310, guid: 5a617b781b72dc94e922b6e2f459f17f, type: 3}
+  - {fileID: -958353471, guid: 5a617b781b72dc94e922b6e2f459f17f, type: 3}
+  - {fileID: 1413475410, guid: 5a617b781b72dc94e922b6e2f459f17f, type: 3}
+  - {fileID: -2057574116, guid: 5a617b781b72dc94e922b6e2f459f17f, type: 3}
+  - {fileID: -1183082109, guid: 5a617b781b72dc94e922b6e2f459f17f, type: 3}
+  - {fileID: -2104076822, guid: 5a617b781b72dc94e922b6e2f459f17f, type: 3}
+  frameInterval: 1
+  feedbackDuration: 3
 --- !u!1 &596294408
 GameObject:
   m_ObjectHideFlags: 0
@@ -4716,7 +4728,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1337916557, guid: 38294cf03b7c86b4b917ee965f18844d, type: 3}
+  m_Sprite: {fileID: 563952310, guid: 5a617b781b72dc94e922b6e2f459f17f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4823,7 +4835,7 @@ GameObject:
   - component: {fileID: 1529393965}
   - component: {fileID: 1529393964}
   m_Layer: 5
-  m_Name: BackButton
+  m_Name: pauseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4903,19 +4915,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1529393966}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1529393964}
-        m_TargetAssemblyTypeName: GoToNextLevel, Assembly-CSharp
-        m_MethodName: SceneTransition
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 00_Title Screen
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1529393966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5313,7 +5313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1685893578
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6023,7 +6023,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1955299441
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6197,6 +6197,7 @@ RectTransform:
   - {fileID: 1685893578}
   - {fileID: 161580668}
   - {fileID: 546718049}
+  - {fileID: 738395070}
   - {fileID: 72356437}
   - {fileID: 372114371}
   - {fileID: 1829833088}
@@ -6205,7 +6206,6 @@ RectTransform:
   - {fileID: 1712830061}
   - {fileID: 1955299441}
   - {fileID: 500175886}
-  - {fileID: 738395070}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6304,7 +6304,7 @@ GameObject:
   - component: {fileID: 2120459339}
   - component: {fileID: 2120459338}
   m_Layer: 5
-  m_Name: ResumeButton
+  m_Name: resumeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
