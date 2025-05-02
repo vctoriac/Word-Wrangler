@@ -46,6 +46,7 @@ public class WordGame : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1f; // Ensure normal time on restart
         gameOverScreen.SetActive(false);
         feedbackText.text = "";
 
