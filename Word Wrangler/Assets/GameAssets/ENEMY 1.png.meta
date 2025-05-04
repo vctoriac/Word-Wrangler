@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 10a87cff0bff9e443bf972ff682ebd91
+guid: 0a8da6e60887fda45af1d6cd9f814772
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,169 +110,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CHARACTER SPRITE_0
+      name: ENEMY 1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 326
-        width: 228
-        height: 300
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c784adf79f377704db4e0ac4bc771017
-      internalID: 773717591
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CHARACTER SPRITE_1
-      rect:
-        serializedVersion: 2
-        x: 229
-        y: 326
-        width: 228
-        height: 300
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0b83d2c6a15b3604ebf787ba6d988947
-      internalID: 1657615226
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CHARACTER SPRITE_2
-      rect:
-        serializedVersion: 2
-        x: 459
-        y: 326
-        width: 228
-        height: 300
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5b7f29d6741692c4ca554d00d55e1b19
-      internalID: -1901249801
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CHARACTER SPRITE_3
-      rect:
-        serializedVersion: 2
-        x: 689
-        y: 326
-        width: 228
-        height: 300
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f3cb4518ff0f0a94fa8716e8097697fe
-      internalID: -1102137401
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CHARACTER SPRITE_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1
-        width: 228
-        height: 300
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: df4e5b042e55818499c25722c768fb63
-      internalID: -1530702254
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CHARACTER SPRITE_5
-      rect:
-        serializedVersion: 2
-        x: 228
         y: 0
-        width: 228
-        height: 300
+        width: 296
+        height: 393
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c958b770001675c48bb646b38056e1f8
-      internalID: 287279484
+      spriteID: 3229494ce2dca954f8562233ca57b3ab
+      internalID: -1492093890
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CHARACTER SPRITE_6
+      name: ENEMY 1_1
       rect:
         serializedVersion: 2
-        x: 458
-        y: 1
-        width: 228
-        height: 300
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 240d30a2637a636468d93c1ff8797a52
-      internalID: -2078564547
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CHARACTER SPRITE_7
-      rect:
-        serializedVersion: 2
-        x: 689
+        x: 296
         y: 0
-        width: 228
-        height: 300
+        width: 296
+        height: 393
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19270792912037646991b17361be4620
-      internalID: 1595311852
+      spriteID: 72542626b590e8a4fb21c087ff9e5a49
+      internalID: 376316652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ENEMY 1_2
+      rect:
+        serializedVersion: 2
+        x: 613
+        y: 0
+        width: 296
+        height: 393
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d2ddcbbc7a543441872aa47b08bffb6
+      internalID: 81283965
       vertices: []
       indices: 
       edges: []
@@ -288,14 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      CHARACTER SPRITE_0: 773717591
-      CHARACTER SPRITE_1: 1657615226
-      CHARACTER SPRITE_2: -1901249801
-      CHARACTER SPRITE_3: -1102137401
-      CHARACTER SPRITE_4: -1530702254
-      CHARACTER SPRITE_5: 287279484
-      CHARACTER SPRITE_6: -2078564547
-      CHARACTER SPRITE_7: 1595311852
+      ENEMY 1_0: -1492093890
+      ENEMY 1_1: 376316652
+      ENEMY 1_2: 81283965
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

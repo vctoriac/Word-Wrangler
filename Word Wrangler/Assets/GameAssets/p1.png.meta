@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e1ded56de2a29834284eacc0b4076ae2
+guid: 2071617f8a4a1f84eaeb1c3973342eb6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,56 +93,27 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: idle
+      name: p1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 247
-        height: 393
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a37a315a491e6046acac448f5bb7c1a
-      internalID: 276334913
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: reach
-      rect:
-        serializedVersion: 2
-        x: 279
-        y: 0
-        width: 248
-        height: 393
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b24d77165eacde84dab36acfda480de9
-      internalID: 495393166
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shoot
-      rect:
-        serializedVersion: 2
-        x: 574
         y: 0
         width: 297
         height: 393
@@ -153,8 +124,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a711299b8496fcd4787c8b9361ae7198
-      internalID: -1842960985
+      spriteID: 4ab8d380a9a4a11419655438d43668d5
+      internalID: 1220665718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p1_1
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 0
+        width: 297
+        height: 393
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f38abe6f21e35341bb88074a3834f46
+      internalID: -324003429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p1_2
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 0
+        width: 297
+        height: 393
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c7ede0cc1ef7b4469f2f8d00a48a01b
+      internalID: 672851887
       vertices: []
       indices: 
       edges: []
@@ -170,9 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      idle: 276334913
-      reach: 495393166
-      shoot: -1842960985
+      p1_0: 1220665718
+      p1_1: -324003429
+      p1_2: 672851887
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

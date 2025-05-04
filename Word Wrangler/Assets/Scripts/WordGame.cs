@@ -18,7 +18,11 @@ public class WordGame : MonoBehaviour
     public TMP_Text countdownText;
     public GameObject pauseScreen;
     public Button pauseButton;   
-    public Button resumeButton;   
+    public Button resumeButton;
+    public CharacterAnimatorUI playerShootAnimator;
+    public CharacterAnimatorUI enemyShootAnimator;
+    public GameObject speechBubble;
+
 
 
     public int synonymsToMatch = 2;
@@ -46,6 +50,9 @@ public class WordGame : MonoBehaviour
 
     void Start()
     {
+        if (speechBubble != null)
+            speechBubble.SetActive(false);
+
         Time.timeScale = 1f; // Ensure normal time on restart
         gameOverScreen.SetActive(false);
         feedbackText.text = "";
@@ -189,7 +196,7 @@ public class WordGame : MonoBehaviour
                 matchedSynonyms.Add(userInput);
                 enemyHealth.value -= 1;
 
-                FindObjectOfType<CharacterAnimatorUI>()?.PlayShootAnimation();
+                playerShootAnimator?.PlayShootAnimation(); 
 
                 if (enemyHealth.value <= 0)
                 {
@@ -207,8 +214,9 @@ public class WordGame : MonoBehaviour
         else
         {
             ShowFeedback("Miss!");
-            EnemyShoots();
+            EnemyShoots(); 
         }
+
 
         inputField.text = "";
         inputField.ActivateInputField();
@@ -221,19 +229,24 @@ public class WordGame : MonoBehaviour
         playerHP -= 1f;
         playerHealth.value = playerHP;
 
+        enemyShootAnimator?.PlayShootAnimation(); // Trigger enemy shooting animation
+
         if (playerHP <= 0)
         {
             EndGame(false);
         }
     }
 
+
     public void SkipWord()
     {
         if (!gameRunning) return;
 
+        enemyShootAnimator?.PlayShootAnimation(); // Trigger enemy shooting animation
+
         if (matchedSynonyms.Count >= grazeThreshold)
         {
-            ShowFeedback("Skipped! The enemy grazed you!");
+            ShowFeedback("Skipped! The enemy grazed me!");
             playerHP -= 0.5f;
         }
         else
@@ -252,6 +265,7 @@ public class WordGame : MonoBehaviour
 
         NextRound();
     }
+
 
     void NextRound()
     {
@@ -288,7 +302,14 @@ public class WordGame : MonoBehaviour
     IEnumerator FeedbackRoutine(string message)
     {
         feedbackText.text = message;
+        if (speechBubble != null)
+            speechBubble.SetActive(true);
+
         yield return new WaitForSeconds(feedbackDuration);
+
         feedbackText.text = "";
+        if (speechBubble != null)
+            speechBubble.SetActive(false);
     }
+
 }
