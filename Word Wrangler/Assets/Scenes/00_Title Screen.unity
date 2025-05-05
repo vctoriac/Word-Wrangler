@@ -889,7 +889,7 @@ MonoBehaviour:
   m_text: TUTORIAL
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0387d2053a77d94d9acceba61294508, type: 2}
-  m_sharedMaterial: {fileID: -8481441694434869402, guid: e0387d2053a77d94d9acceba61294508, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 8d40e7052936a134da878b2717d5d685, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1023,7 +1023,7 @@ MonoBehaviour:
   m_text: PLAY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0387d2053a77d94d9acceba61294508, type: 2}
-  m_sharedMaterial: {fileID: -8481441694434869402, guid: e0387d2053a77d94d9acceba61294508, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 8d40e7052936a134da878b2717d5d685, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
